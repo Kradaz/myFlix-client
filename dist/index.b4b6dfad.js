@@ -27135,21 +27135,21 @@ const MainView = ()=>{
     const [movies, setMovies] = (0, _react.useState)([
         {
             id: 1,
-            title: "Eloquent JavaScript",
-            image: "https://images-na.ssl-images-amazon.com/images/I/51InjRPaF7L._SX377_BO1,204,203,200_.jpg",
-            author: "Marijn Haverbeke"
+            title: "Shutter Island",
+            image: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTDqBjsQqiH8fHLE7rmp8Kesh4143AeyVOfnItvVPRpGMMSLfsx",
+            author: "Martin Scorsese"
         },
         {
             id: 2,
-            title: "Mastering JavaScript Functional Programming",
-            image: "https://images-na.ssl-images-amazon.com/images/I/51WAikRq37L._SX218_BO1,204,203,200_QL40_FMwebp_.jpg",
-            author: "Federico Kereki"
+            title: "Seven Souls",
+            image: "https://scontent-lhr8-1.xx.fbcdn.net/v/t39.30808-6/301750213_423737133189593_4628249996821775683_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=d75-5eC3I2oAX-fzCeB&_nc_ht=scontent-lhr8-1.xx&oh=00_AfDOPSpvPjCEOMDTaXXxUYYtkCsIgwjMyLQ9n3WYOT4qxg&oe=63B1C4B0",
+            author: "Gerry Bruno"
         },
         {
             id: 3,
-            title: "JavaScript: The Good Parts",
-            image: "https://images-na.ssl-images-amazon.com/images/I/5131OWtQRaL._SX381_BO1,204,203,200_.jpg",
-            author: "Douglas Crockford"
+            title: "Trainspotting",
+            image: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRL72QB6PzUUQZMxsfFNBtctU5XpRUOJDPL2r7XnT1iPl39yCMH",
+            author: "Danny Boyle"
         }
     ]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
@@ -27185,7 +27185,7 @@ const MainView = ()=>{
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "uuIcRG9l89ypGmQN0wwuQ1YzF6g=");
+_s(MainView, "2OMm5mRK+/tH0KU9jeiSjMjnoFs=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
