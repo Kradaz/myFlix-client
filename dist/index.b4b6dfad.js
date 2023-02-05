@@ -27132,40 +27132,34 @@ var _movieView = require("../movie-view/movie-view");
 var _s = $RefreshSig$();
 const MainView = ()=>{
     _s();
-    const [movies, setMovies] = (0, _react.useState)([
-        {
-            id: 1,
-            title: "Shutter Island",
-            image: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTDqBjsQqiH8fHLE7rmp8Kesh4143AeyVOfnItvVPRpGMMSLfsx",
-            author: "Martin Scorsese"
-        },
-        {
-            id: 2,
-            title: "Seven Souls",
-            image: "https://scontent-lhr8-1.xx.fbcdn.net/v/t39.30808-6/301750213_423737133189593_4628249996821775683_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=d75-5eC3I2oAX-fzCeB&_nc_ht=scontent-lhr8-1.xx&oh=00_AfDOPSpvPjCEOMDTaXXxUYYtkCsIgwjMyLQ9n3WYOT4qxg&oe=63B1C4B0",
-            author: "Gerry Bruno"
-        },
-        {
-            id: 3,
-            title: "Trainspotting",
-            image: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRL72QB6PzUUQZMxsfFNBtctU5XpRUOJDPL2r7XnT1iPl39yCMH",
-            author: "Danny Boyle"
-        }
-    ]);
+    const [movies, setMovies] = (0, _react.useState)([]);
+    (0, _react.useEffect)(()=>{
+        fetch("https://lit-headland-72819.herokuapp.com/movies").then((response)=>response.json()).then((data)=>{
+            const moviesFromApi = data.map((doc)=>{
+                return {
+                    id: doc._id,
+                    title: doc.Title,
+                    image: doc.ImagePath,
+                    author: doc.Director.Name
+                };
+            });
+            setMovies(moviesFromApi);
+        });
+    }, []);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
     if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
         movie: selectedMovie,
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 34,
+        lineNumber: 29,
         columnNumber: 7
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 39,
+        lineNumber: 34,
         columnNumber: 12
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27176,16 +27170,16 @@ const MainView = ()=>{
                 }
             }, movie.id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 44,
+                lineNumber: 39,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 42,
+        lineNumber: 37,
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "2OMm5mRK+/tH0KU9jeiSjMjnoFs=");
+_s(MainView, "llzgrUkvR/+OoCNfiqlA1H2LLFI=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
@@ -27407,7 +27401,8 @@ const MovieView = ({ movie , onBackClick  })=>{
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                    src: movie.image
+                    src: movie.image,
+                    crossOrigin: "anonymous"
                 }, void 0, false, {
                     fileName: "src/components/movie-view/movie-view.jsx",
                     lineNumber: 5,
