@@ -13,11 +13,10 @@ export const MainView = () => {
   
 
   useEffect(() => {
-    if (!token) {
-      return;
-    }
+    if (!token) return;
+
     fetch("https://lit-headland-72819.herokuapp.com/movies", {
-      headers: { Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((data) => {
