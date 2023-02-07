@@ -13,6 +13,7 @@ export const LoginView = ({ onLoggedIn }) => {
       Password: password
     };
 
+    console.log(data)
     fetch("https://lit-headland-72819.herokuapp.com/login", {
       method: "POST",
       headers: {
@@ -30,10 +31,10 @@ export const LoginView = ({ onLoggedIn }) => {
         } else {
           alert("No such user");
         }
+      })
+      .catch((e) => {
+        alert(e);
       })};
-/*       .catch((e) => {
-        alert("Something went wrong");
-      })}; */
 
   return (
     <form onSubmit={handleSubmit}>
