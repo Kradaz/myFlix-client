@@ -1,53 +1,57 @@
-import { useEffect, useState } from "react";
-import { MovieCard } from "../movie-card/movie-card";
+import React from "react";
+import axios from 'axios';
+import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from "../movie-view/movie-view";
-/* import { LoginView } from "../login-view/login-view"; */
 
-export const MainView = () => {
-/*   const storedUser = JSON.parse(localStorage.getItem("user"));
-  const storedToken = localStorage.getItem("token"); */
-  // const [user, setUser] = useState(storedUser? storedUser : null);
-/*   const [token, setToken] = useState(storedToken? storedToken : null); */
-  const [movies, setMovies] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState(null);
-  
+export class MainView extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      movies: [],
+      selectedMovie: null
+    };
+  }
 
-  useEffect(() => {
-    fetch("https://lit-headland-72819.herokuapp.com/movies")
-      .then((response) => response.json())
-      .then((data) => {
-        const moviesFromApi = data.map((doc) => {
-          return {
-            id: doc._id,
-            title: doc.Title,
-            image: doc.ImagePath,
-            author: doc.Director.Name,
-          };
+  componentDidMount() {
+    axios.get('https://lit-headland-72819.herokuapp.com/movies')
+      .then(response => {
+        this.setState({
+          movies: response.data
         });
-
-        setMovies(moviesFromApi);
+      })
+      .catch(error => {
+        console.log(error);
       });
-  }, []);
+  }
 
-  if (selectedMovie) {
+  setSelectedMovie(newSelectedMovie) {
+    this.setState({
+      selectedMovie: newSelectedMovie
+    });
+  }
+
+  if(selectedMovie) {
     return (
       <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
     );
   }
-  if (movies.length === 0) {
-    return <div>The list is empty!</div>;
-  }
-  return (
-    <div>
-      {movies.map((movie) => (
-        <MovieCard
-          key={movie.id}
-          movie={movie}
-          onMovieClick={(newSelectedMovie) => {
-            setSelectedMovie(newSelectedMovie);
-          }}
-        />
-      ))}
-    </div>
-  );
-};
+  render() {
+    const { movies, selectedMovie } = this.state;
+
+    if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
+    return (
+      <div>
+        {selectedMovie
+          ? (
+            <MovieView movie={selectedMovie} onBackClick={newselectedMovie => { this.setSelectedMovie(newselectedMovie); }} />
+
+          )
+          : movies.map(movie => (
+            <MovieCard key={movie._id} movie={movie} onMovieClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
+
+          ))
+        }
+      </div>
+    );
+  };
+}

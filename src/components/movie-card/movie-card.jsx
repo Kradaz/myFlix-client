@@ -1,16 +1,15 @@
+import React from 'react';
 import PropTypes from "prop-types";
 
-export const MovieCard = ({ movie, onMovieClick }) => {
-  return (
-    <div
-      onClick={() => {
-        onMovieClick(movie);
-      }}
-    >
-      {movie.title}
-    </div>
-  );
-};
+export class MovieCard extends React.Component {
+  render() {
+    const { movie, onMovieClick } = this.props;
+
+    return (
+      <div onClick={() => onMovieClick(movie)} className="movie-card">{movie.Title}</div>
+    );
+  }
+}
 
 MovieCard.propTypes = {
     movie: PropTypes.shape({
