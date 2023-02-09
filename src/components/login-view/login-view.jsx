@@ -1,4 +1,4 @@
-import { useState } from "react";
+/* import { useState } from "react";
 
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
@@ -31,7 +31,7 @@ export const LoginView = ({ onLoggedIn }) => {
           onLoggedIn(data.user, data.token);
         } else {
           alert("No such user");
-        }
+        }`
       })
       .catch((e) => {
         alert(e);
@@ -60,4 +60,4 @@ export const LoginView = ({ onLoggedIn }) => {
       <button type="submit">Submit</button>
     </form>
   );
-};
+}; */
