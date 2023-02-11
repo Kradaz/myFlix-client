@@ -1,5 +1,6 @@
 import React from "react";
 import axios from 'axios';
+import { SignupView } from '../Signup-view/signup-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
@@ -51,7 +52,7 @@ export class MainView extends React.Component {
   }
   render() {
     const { movies, selectedMovie, user, registered } = this.state;
-    if (!registered) return <RegistrationView />;
+    if (!registered) return <SignupView />;
 
     if (!user)
     return (
