@@ -1,63 +1,38 @@
-/* import { useState } from "react";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-export const LoginView = ({ onLoggedIn }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+export function LoginView(props) {
+  const [ username, setUsername ] = useState('');
+  const [ password, setPassword ] = useState('');
 
-  const handleSubmit = (event) => {
-    // this prevents the default behavior of the form which is to reload the entire page
-    event.preventDefault();
-
-    const data = {
-      "Username": username,
-      "Password": password
-    };
-
-    console.log(data)
-    fetch("https://lit-headland-72819.herokuapp.com/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        'Access-Control-Allow-Origin':'*'
-      },
-      body: JSON.stringify(data)
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Login response: ", data);
-        if (data.user) {
-          localStorage.setItem("user", JSON.stringify(data.user));
-          localStorage.setItem("token", data.token);
-          onLoggedIn(data.user, data.token);
-        } else {
-          alert("No such user");
-        }`
-      })
-      .catch((e) => {
-        alert(e);
-      })};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(username, password);
+    /* Send a request to the server for authentication */
+    /* then call props.onLoggedIn(username) */
+    props.onLoggedIn(username);
+  };
+  const handleRegisterClick = (e) => {
+    e.preventDefault();
+    props.toRegister();
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <label>
         Username:
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
+        <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
       </label>
       <label>
         Password:
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
       </label>
-      <button type="submit">Submit</button>
+      <button type="submit" onClick={handleSubmit}>Log In</button>
+      <button type="button">Register</button>
     </form>
   );
-}; */
+}
+
+LoginView.propTypes = {
+  onLoggedIn: PropTypes.func.isRequired,
+};
