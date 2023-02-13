@@ -7,10 +7,20 @@ export function LoginView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
-    /* Send a request to the server for authentication */
-    /* then call props.onLoggedIn(username) */
-    props.onLoggedIn(username);
+
+    const data = {
+      Username: username,
+      Password: password
+    };
+
+    fetch("https://lit-headland-72819.herokuapp.com/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        'Access-Control-Allow-Origin':'*'
+      },
+      body: JSON.stringify(data)
+    });
   };
   const handleRegisterClick = (e) => {
     e.preventDefault();
