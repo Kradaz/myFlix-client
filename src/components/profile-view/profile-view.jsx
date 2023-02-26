@@ -1,72 +1,72 @@
-import React, { useEffect, useState} from "react";
-import { Link } from "react-router-dom";
-import "./profile-view.scss";
-import axios from "axios";
+import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/movie-card";
-import UserInfo from "./user-info";
+import { UpdateUser } from "./update-user";
+import { FavMovies } from "./favorite-movies";
+import { Button, Container, Form, Row, Col, Card } from "react-bootstrap";
 
-export function ProfileView({ movies, onUpdatedUserInfo }) {
-  const [user, setUser] = useState({
+export const ProfileView = ({ user, movies }) => {
+
+    const storedToken = localStorage.getItem("token");
+    const storedMovies = JSON.parse(localStorage.getItem("movies"))
+    const storedUser = localStorage.getItem("user");
+
+
+    const [token] = useState(storedToken ? storedToken : null);
+
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [favoriteMovies, setFavoriteMovies] = useState([]);
+
+    const [allMovies] = useState(storedMovies ? storedMovies: movies);
+    const [filteredMovies, setFilteredMovies] = useState([]);
+
+
+// Show updated user on the profile
+const getUser = (token) => {
+  fetch(`https://lit-headland-72819.herokuapp.com/users/${user.Username}`,{
+    method: "GET",
+    headers: { Authorization: `Bearer ${token}`},
+  }).then(response => response.json())
+  .then((response) => {
+    console.log("getUser response", response)
+    setUsername(response.Username);
+    setEmail(response.Email);
+    setPassword(response.Password);
+    setFavoriteMovies(response.favoriteMovies)
   })
+}
+console.log("userFavMov", favoriteMovies)
 
-  const favoriteMovieList = movies.filter((movies) => {
-  });
-
-  const getUser = () => {
-  }
-  const handleSubmit = (e) => {
-  }
-  const removeFav = (id) => {
-  }
-  const handleUpdate = (e) => {
-  };
-
-  useEffect(() => {
-  }, [])
+useEffect(()=> {
+  getUser(token);
+},[])
 
   return (
-    <div>
-      <UserInfo name={ user.Username} email={user.Email}/>
-    <div>
-      <h2>Favorite Movies</h2>
-      {favoriteMovieList.map((movies) => {
-        return (
-          <div key={movies._id}>
-            <img src={movies.ImagePath}/>
-            <Link to={`/movies/${movies._id}`}>
-              <h4>{movies.Title}</h4>
-            </Link>
-            <button variant="secondary" onClick={() => removeFav(movies._id)}>Remove from list</button>
-          </div>
-        )
-      })
-    }
-
-    </div>
-    <form className="profile-form" onSubmit={(e) => handleSubmit(e)}>
-      <h2>Wanto to update some info?</h2>
-      <label>Username:</label>
-      <input
-        type='text'
-        name='Username'
-        defaultValue={user.Username}
-        onChange={e => handleUpdate(e)} />
-      <label>Password</label>
-      <input
-        type='password'
-        name='password'
-        defaultValue={user.Password}
-        onChange={e => handleUpdate(e)} />
-      <label>Email address</label>
-      <input
-        type='email'
-        name='email'
-        defaultValue={user.Email}
-        onChange={e => handleUpdate(e.target.value)} />
-      <button variant='primary' type='submit'>
-        Update
-      </button>
-    </form>
-  </div>
-  );
-}
+    <Container>
+      <Row className= "mb-4">
+        <Col>
+          <Card>
+            <Card.Body>
+              <div>
+                <h4>User Details</h4>
+                <p>Username: {username}</p>
+                <p>Email: {email}</p>
+              </div> 
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col >
+        <Card>
+          <Card.Body>
+            <UpdateUser user={user}/>
+          </Card.Body>
+        </Card>
+        </Col>
+      </Row>
+      <Row>
+        <FavMovies user={user} movies={movies}/>
+        </Row>
+    </Container>
+  )
+};
