@@ -47159,14 +47159,14 @@ const FavMovies = ({ user , movies  })=>{
                 children: "Favorite movies:"
             }, void 0, false, {
                 fileName: "src/components/profile-view/favorite-movies.jsx",
-                lineNumber: 58,
+                lineNumber: 59,
                 columnNumber: 5
             }, undefined),
             favoriteMovies.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                 children: "No movies selected"
             }, void 0, false, {
                 fileName: "src/components/profile-view/favorite-movies.jsx",
-                lineNumber: 61,
+                lineNumber: 62,
                 columnNumber: 6
             }, undefined) : favoriteMovies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                     className: "mb-4",
@@ -47177,12 +47177,12 @@ const FavMovies = ({ user , movies  })=>{
                         movie: movie
                     }, void 0, false, {
                         fileName: "src/components/profile-view/favorite-movies.jsx",
-                        lineNumber: 63,
+                        lineNumber: 64,
                         columnNumber: 8
                     }, undefined)
                 }, movie.id, false, {
                     fileName: "src/components/profile-view/favorite-movies.jsx",
-                    lineNumber: 62,
+                    lineNumber: 63,
                     columnNumber: 6
                 }, undefined))
         ]

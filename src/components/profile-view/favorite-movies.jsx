@@ -31,6 +31,7 @@ const getUser = (token) => {
       setEmail(response.Email);
       setPassword(response.Password);
       setBirthday(response.Birthday);
+      
       setFavoriteMovies(response.FavoriteMovies)
     })
   }
